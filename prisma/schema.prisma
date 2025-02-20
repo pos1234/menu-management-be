@@ -14,19 +14,19 @@ datasource db {
 }
 
 model Menu {
-  id       String  @id @default(uuid())
-  name     String
-  url      String? // Optional URL for menu items
-  icon     String? // Optional icon identifier
-  order    Int     @default(0) // For sorting items in the same level
-  parentId String?
+  id       String   @id @default(uuid())
+  name     String   @db.VarChar(255) // Adding max length constraint
+  url      String?  @db.VarChar(1000) // Optional URL with max length
+  icon     String?  @db.VarChar(100) // Optional icon identifier with max length
+  order    Int      @default(0) // For sorting items in the same level
+  parentId String?  @db.Uuid // Explicitly specify UUID type
 
-  // Self-referential relationships
-  parent   Menu?  @relation("MenuToMenu", fields: [parentId], references: [id], onDelete: SetNull)
-  children Menu[] @relation("MenuToMenu")
+  // Self-referential relationships with improved cascade behavior
+  parent   Menu?    @relation("MenuToMenu", fields: [parentId], references: [id], onDelete: Cascade)
+  children Menu[]   @relation("MenuToMenu")
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt // Changed to @updatedAt for automatic updates
 
   @@index([parentId])
   @@index([order])
