@@ -16,7 +16,7 @@ async function bootstrap() {
 
   // Enable CORS for frontend
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: 'https://menu-management-be-ngza.onrender.com',
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });
