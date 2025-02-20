@@ -16,7 +16,7 @@ async function bootstrap() {
 
   // Enable CORS for frontend
   app.enableCors({
-    origin: 'https://menu-management-be-ngza.onrender.com',
+    origin: 'https://menu-management-fe.vercel.app',
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });
